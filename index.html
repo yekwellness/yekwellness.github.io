@@ -82,6 +82,12 @@ button { cursor: pointer; border: none; background: none; }
   margin-inline: auto;
 }
 
+/* Herbalife SVG Logo Utility */
+.hl-logo-svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* Top Notification Banner */
 .top-banner {
   background: linear-gradient(90deg, var(--green-deep), var(--green-mid));
@@ -169,6 +175,9 @@ button { cursor: pointer; border: none; background: none; }
   letter-spacing: 0.12em;
   color: var(--green-deep);
   line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .brand-subtitle {
@@ -183,7 +192,7 @@ button { cursor: pointer; border: none; background: none; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .nav-link {
@@ -310,7 +319,7 @@ button { cursor: pointer; border: none; background: none; }
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: -10px 0 30px rgba(0,0,0,0.15);
@@ -468,7 +477,7 @@ button { cursor: pointer; border: none; background: none; }
 .hero-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 34, 27, 0) 50%, rgba(11, 34, 27, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(11, 34, 27, 0) 40%, rgba(11, 34, 27, 0.75) 100%);
 }
 
 .hero-image-caption {
@@ -484,6 +493,9 @@ button { cursor: pointer; border: none; background: none; }
   font-size: 1.6rem;
   font-weight: 500;
   margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .hero-image-caption p {
@@ -495,7 +507,7 @@ button { cursor: pointer; border: none; background: none; }
 /* Floating Glass Cards */
 .floating-glass-card {
   position: absolute;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: var(--radius-md);
@@ -580,6 +592,90 @@ button { cursor: pointer; border: none; background: none; }
   color: var(--text-main);
 }
 
+/* Herbalife Story Section */
+.story-section {
+  background: var(--bg-paper);
+  border-block: 1px solid var(--border-light);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.story-visual-wrap {
+  position: relative;
+}
+
+.story-image-box {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid var(--bg-cream);
+}
+
+.story-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.story-badge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(11, 34, 27, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid rgba(203, 168, 97, 0.3);
+}
+
+.story-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.timeline-item {
+  background: var(--bg-cream);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.timeline-year {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
 /* Section Common Layout */
 .section {
   padding: 100px 0;
@@ -649,6 +745,12 @@ button { cursor: pointer; border: none; background: none; }
 
 .category-card:hover::before {
   opacity: 1;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .category-tag {
@@ -863,6 +965,13 @@ button { cursor: pointer; border: none; background: none; }
   letter-spacing: 0.04em;
 }
 
+.product-hl-stamp {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  opacity: 0.65;
+}
+
 .product-body {
   padding: 24px;
   display: flex;
@@ -993,29 +1102,31 @@ button { cursor: pointer; border: none; background: none; }
   aspect-ratio: 1;
   border: 2px solid var(--gold-primary);
   border-radius: 50%;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
   background: radial-gradient(circle, rgba(203, 168, 97, 0.05) 0%, transparent 70%);
 }
 
 .about-emblem-inner {
   font-family: var(--font-serif);
-  font-size: 5.5rem;
+  font-size: 4.8rem;
   font-weight: 500;
   color: var(--gold-light);
   letter-spacing: -0.04em;
   text-align: center;
+  line-height: 1;
 }
 
 .about-emblem-tag {
-  position: absolute;
-  bottom: 36px;
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.3em;
   color: var(--gold-primary);
   text-transform: uppercase;
+  margin-top: 8px;
 }
 
 .about-content .badge-eyebrow {
@@ -1230,6 +1341,7 @@ button { cursor: pointer; border: none; background: none; }
   .hero-visual { max-width: 500px; margin-inline: auto; }
   .floating-glass-card.card-1 { left: 0; }
   .floating-glass-card.card-2 { right: 0; }
+  .story-grid { grid-template-columns: 1fr; gap: 40px; }
   .category-grid, .product-grid { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .consulting-steps { text-align: left; }
@@ -1245,6 +1357,7 @@ button { cursor: pointer; border: none; background: none; }
   .product-title { font-size: 0.95rem; }
   .product-desc { font-size: 0.78rem; -webkit-line-clamp: 2; }
   .product-visual { height: 160px; }
+  .story-timeline { grid-template-columns: 1fr; }
   .contact-card { grid-template-columns: 1fr; text-align: center; padding: 32px 24px; }
   .contact-card p { margin-inline: auto; }
   .contact-actions { min-width: 100%; }
@@ -1263,10 +1376,21 @@ button { cursor: pointer; border: none; background: none; }
 </head>
 <body>
 
+<!-- SVG Reusable Herbalife Tri-Leaf Logo Template -->
+<svg style="display: none;">
+  <symbol id="hl-logo" viewBox="0 0 100 100">
+    <path d="M50 15 C38 32, 28 50, 48 85 C55 60, 58 35, 50 15 Z" fill="currentColor"/>
+    <path d="M42 48 C22 42, 5 48, 12 80 C32 72, 42 60, 42 48 Z" fill="currentColor"/>
+    <path d="M58 48 C78 42, 95 48, 88 80 C68 72, 58 60, 58 48 Z" fill="currentColor"/>
+  </symbol>
+</svg>
+
 <!-- Top Banner -->
 <div class="top-banner">
   <span class="top-banner-dot"></span>
-  Bilgiye Dayalı Seçimler &nbsp;•&nbsp; Bire Bir Wellness Danışmanlığı
+  Bilgiye Dayalı Seçimler &nbsp;•&nbsp; 
+  <svg class="hl-logo-svg" width="16" height="16" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg> 
+  Herbalife Bire Bir Wellness Danışmanlığı
   <span class="top-banner-dot"></span>
 </div>
 
@@ -1276,13 +1400,17 @@ button { cursor: pointer; border: none; background: none; }
     <a href="#anasayfa" class="brand" aria-label="YEK Wellness Ana Sayfa">
       <div class="brand-logo">YEK</div>
       <div class="brand-text">
-        <span class="brand-title">YEK WELLNESS</span>
+        <span class="brand-title">
+          YEK WELLNESS 
+          <svg class="hl-logo-svg" width="14" height="14" style="color: var(--green-mid);"><use href="#hl-logo"/></svg>
+        </span>
         <span class="brand-subtitle">Yusuf Emre Karabörk</span>
       </div>
     </a>
 
     <!-- Desktop Links -->
     <nav class="nav-links" aria-label="Ana Menü">
+      <a href="#hikaye" class="nav-link">Şirket Hikayesi</a>
       <a href="#gruplar" class="nav-link">Ürün Grupları</a>
       <a href="#katalog" class="nav-link">Ürün Kataloğu</a>
       <a href="#danismanlik" class="nav-link">Danışmanlık</a>
@@ -1302,13 +1430,17 @@ button { cursor: pointer; border: none; background: none; }
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-content">
     <button class="mobile-menu-close" id="mobileClose">&times;</button>
-    <div class="brand" style="margin-bottom: 20px;">
+    <div class="brand" style="margin-bottom: 10px;">
       <div class="brand-logo">YEK</div>
       <div class="brand-text">
-        <span class="brand-title">YEK WELLNESS</span>
+        <span class="brand-title">
+          YEK WELLNESS
+          <svg class="hl-logo-svg" width="14" height="14" style="color: var(--green-mid);"><use href="#hl-logo"/></svg>
+        </span>
         <span class="brand-subtitle">Yusuf Emre Karabörk</span>
       </div>
     </div>
+    <a href="#hikaye" class="nav-link mobile-link">Herbalife Hikayesi</a>
     <a href="#gruplar" class="nav-link mobile-link">Ürün Grupları</a>
     <a href="#katalog" class="nav-link mobile-link">Ürün Kataloğu</a>
     <a href="#danismanlik" class="nav-link mobile-link">Danışmanlık Hizmeti</a>
@@ -1330,7 +1462,7 @@ button { cursor: pointer; border: none; background: none; }
   <div class="container hero-grid">
     <div class="reveal">
       <div class="badge-eyebrow">
-        <span class="badge-eyebrow-dot"></span>
+        <svg class="hl-logo-svg" width="16" height="16" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg>
         Bağımsız Herbalife Danışmanı
       </div>
       <h1 class="hero-title">
@@ -1339,15 +1471,15 @@ button { cursor: pointer; border: none; background: none; }
         başlar.
       </h1>
       <p class="hero-description">
-        Herbalife ürün dünyasını keşfedin. Günlük rutininize, hedeflerinize ve beslenme ihtiyaçlarınıza en uygun seçenekleri şeffaf bilgiyle birlikte belirleyelim.
+        Herbalife Nutrition dünyasını keşfedin. Günlük rutininize, hedeflerinize ve beslenme ihtiyaçlarınıza en uygun seçenekleri şeffaf bilgiyle birlikte belirleyelim.
       </p>
       <div class="hero-actions">
         <a href="#katalog" class="btn btn-primary">
           <span>Kataloğu İncele</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#danismanlik" class="btn btn-outline">
-          Danışmanlık Hakkında
+        <a href="#hikaye" class="btn btn-outline">
+          Herbalife Hikayesi
         </a>
       </div>
       <div class="hero-trust-bullets">
@@ -1365,10 +1497,13 @@ button { cursor: pointer; border: none; background: none; }
     <!-- Visual Showcase -->
     <div class="hero-visual reveal">
       <div class="hero-image-frame">
-        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=85" alt="Taze ve sağlıklı beslenme sunumu" fetchpriority="high">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=85" alt="Taze ve sağlıklı doğa beslenmesi" fetchpriority="high">
         <div class="hero-image-overlay"></div>
         <div class="hero-image-caption">
-          <h4>Dengeli Yaşam Rutini</h4>
+          <h4>
+            <svg class="hl-logo-svg" width="22" height="22" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg>
+            Dengeli Yaşam Rutini
+          </h4>
           <p>Kişisel hedeflerinize özel beslenme programı desteği.</p>
         </div>
       </div>
@@ -1380,8 +1515,8 @@ button { cursor: pointer; border: none; background: none; }
       </div>
 
       <div class="floating-glass-card card-2">
-        <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--green-soft); color: var(--green-deep); display: grid; place-items: center; font-weight: 800;">
-          ★
+        <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--green-soft); color: var(--green-deep); display: grid; place-items: center;">
+          <svg class="hl-logo-svg" width="20" height="20" style="color: var(--green-main);"><use href="#hl-logo"/></svg>
         </div>
         <div>
           <strong style="display: block; font-size: 0.9rem; color: var(--green-deep);">Karar Sizin</strong>
@@ -1396,7 +1531,9 @@ button { cursor: pointer; border: none; background: none; }
 <div class="trust-strip">
   <div class="container trust-strip-grid">
     <div class="trust-strip-item">
-      <div class="trust-strip-icon">🏷️</div>
+      <div class="trust-strip-icon">
+        <svg class="hl-logo-svg" width="20" height="20" style="color: var(--green-main);"><use href="#hl-logo"/></svg>
+      </div>
       <div class="trust-strip-text">Ürün etiketine dayalı doğru ve güvenilir bilgilendirme</div>
     </div>
     <div class="trust-strip-item">
@@ -1410,12 +1547,66 @@ button { cursor: pointer; border: none; background: none; }
   </div>
 </div>
 
+<!-- Herbalife Company Story Section -->
+<section class="story-section" id="hikaye">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual-wrap reveal">
+        <div class="story-image-box">
+          <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1000&q=80" alt="Doğadan gelen bilim ve beslenme">
+          <div class="story-badge">
+            <svg class="hl-logo-svg" width="20" height="20" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg>
+            <span>Tohumdan Besine (Seed to Feed)</span>
+          </div>
+        </div>
+        <div class="story-timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">1980</div>
+            <p class="timeline-text">Mark Hughes liderliğinde Los Angeles'ta başlayan beslenme vizyonu.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">90+</div>
+            <p class="timeline-text">Dünya genelinde 90'dan fazla ülkede milyonlarca mutlu kullanıcı.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">%100</div>
+            <p class="timeline-text">Bilimsel danışma kurulu ve titiz kalite kontrol süreçleri.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="badge-eyebrow">
+          <svg class="hl-logo-svg" width="16" height="16" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg>
+          Bir Küresel Başarı Hikayesi
+        </div>
+        <h2 class="section-title">Herbalife'ın Doğuşu & Kalite Yolculuğu</h2>
+        <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin: 20px 0;">
+          Herbalife, 1980 yılında kurucusu <strong>Mark Hughes</strong>'un insanlara dengeli, kaliteli ve pratik bir beslenme alışkanlığı kazandırma hayaliyle kuruldu. İlk günden itibaren doğanın iyiliğini bilimsel araştırmalarla birleştirerek modern dünyanın ihtiyaçlarına uygun çözümler üretmeye odaklandı.
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px;">
+          Günümüzde Herbalife Nutrition; <strong>"Tohumdan Besine" (Seed to Feed)</strong> yaklaşımıyla tarladaki hammaddeden ambalajlanan son ürüne kadar en yüksek kalite standartlarını uygular. Bünyesindeki dünyaca ünlü bilim insanları, beslenme uzmanları ve doktorlar ile geliştirilen formüller, dengeli yaşamı desteklemektedir.
+        </p>
+        <div style="display: flex; gap: 16px; align-items: center; padding: 18px 24px; background: var(--green-soft); border-radius: var(--radius-md); border-left: 4px solid var(--green-main);">
+          <svg class="hl-logo-svg" width="32" height="32" style="color: var(--green-main); flex-shrink: 0;"><use href="#hl-logo"/></svg>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--green-deep); font-weight: 600; line-height: 1.5;">
+            "Dengeli beslenme bir trend değil, sürdürülebilir bir yaşam biçimidir." — YEK WELLNESS yaklaşımıyla bu mirası sizlere bire bir danışmanlıkla sunuyoruz.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Product Categories Section -->
 <section class="section" id="gruplar">
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <div class="badge-eyebrow" style="margin-bottom: 10px;">Ürünleri Tanıyın</div>
+        <div class="badge-eyebrow" style="margin-bottom: 10px;">
+          <svg class="hl-logo-svg" width="16" height="16" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg>
+          Ürünleri Tanıyın
+        </div>
         <h2 class="section-title">İhtiyacınıza uygun olanı<br>birlikte belirleyelim.</h2>
       </div>
       <p class="section-desc">
@@ -1425,7 +1616,10 @@ button { cursor: pointer; border: none; background: none; }
 
     <div class="category-grid">
       <div class="category-card reveal">
-        <span class="category-tag">01 / BESLENME</span>
+        <div class="category-header">
+          <span class="category-tag">01 / BESLENME</span>
+          <svg class="hl-logo-svg" width="18" height="18" style="color: var(--gold-dark);"><use href="#hl-logo"/></svg>
+        </div>
         <h3>Günlük Beslenme</h3>
         <p>Yoğun temponuzda günlük besin öğesi ihtiyaçlarınızı destekleyecek pratik Shake ve lif çözümleri.</p>
         <a href="#katalog" class="category-link" data-cat-trigger="Shake ve beslenme">
@@ -1435,7 +1629,10 @@ button { cursor: pointer; border: none; background: none; }
       </div>
 
       <div class="category-card reveal">
-        <span class="category-tag">02 / PERFORMANS</span>
+        <div class="category-header">
+          <span class="category-tag">02 / PERFORMANS</span>
+          <svg class="hl-logo-svg" width="18" height="18" style="color: var(--gold-dark);"><use href="#hl-logo"/></svg>
+        </div>
         <h3>Sporcu Beslenmesi</h3>
         <p>Egzersiz öncesi, esnası ve sonrasında kas yapısını ve enerjiyi destekleyen özel protein çözümleri.</p>
         <a href="#katalog" class="category-link" data-cat-trigger="Sporcu beslenmesi">
@@ -1445,7 +1642,10 @@ button { cursor: pointer; border: none; background: none; }
       </div>
 
       <div class="category-card reveal">
-        <span class="category-tag">03 / CANLILIK</span>
+        <div class="category-header">
+          <span class="category-tag">03 / CANLILIK</span>
+          <svg class="hl-logo-svg" width="18" height="18" style="color: var(--gold-dark);"><use href="#hl-logo"/></svg>
+        </div>
         <h3>Aktif Yaşam & İçecek</h3>
         <p>Gün boyu tazelik ve ferahlık sunan bitkisel çaylar, Aloe konsantresi ve efervesan içecekler.</p>
         <a href="#katalog" class="category-link" data-cat-trigger="Çay ve içecek">
@@ -1462,7 +1662,10 @@ button { cursor: pointer; border: none; background: none; }
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <div class="badge-eyebrow" style="margin-bottom: 10px;">Katalog</div>
+        <div class="badge-eyebrow" style="margin-bottom: 10px;">
+          <svg class="hl-logo-svg" width="16" height="16" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg>
+          Katalog
+        </div>
         <h2 class="section-title">Herbalife Ürün Kataloğu</h2>
       </div>
       <p class="section-desc">
@@ -1508,15 +1711,17 @@ button { cursor: pointer; border: none; background: none; }
   <div class="container about-grid">
     <div class="about-emblem-wrap reveal">
       <div class="about-emblem">
-        <div class="about-emblem-inner">
-          YEK
-        </div>
+        <svg class="hl-logo-svg" width="54" height="54" style="color: var(--gold-primary); margin-bottom: 8px;"><use href="#hl-logo"/></svg>
+        <div class="about-emblem-inner">YEK</div>
         <div class="about-emblem-tag">WELLNESS</div>
       </div>
     </div>
 
     <div class="about-content reveal">
-      <div class="badge-eyebrow">Yusuf Emre Karabörk İle</div>
+      <div class="badge-eyebrow">
+        <svg class="hl-logo-svg" width="16" height="16" style="color: var(--gold-light);"><use href="#hl-logo"/></svg>
+        Yusuf Emre Karabörk İle
+      </div>
       <h2 class="about-title">Karar vermeden önce<br>birlikte değerlendirelim.</h2>
       <p class="about-desc">
         Ürünleri doğru tanımak, etiket içeriklerini anlamak ve hedeflerinize uygun seçimler yapmak için sade, samimi ve yönlendirici bir görüşme. Amacımız ürünleri en verimli şekilde kullanmanıza rehberlik etmek.
@@ -1553,7 +1758,10 @@ button { cursor: pointer; border: none; background: none; }
   <div class="container">
     <div class="contact-card reveal">
       <div>
-        <div class="badge-eyebrow" style="margin-bottom: 12px;">Doğrudan İletişim</div>
+        <div class="badge-eyebrow" style="margin-bottom: 12px;">
+          <svg class="hl-logo-svg" width="16" height="16" style="color: var(--gold-dark);"><use href="#hl-logo"/></svg>
+          Doğrudan İletişim
+        </div>
         <h2>Aklınıza takılan bir soru mu var?</h2>
         <p>Ürünler, stok durumu veya kişisel kullanım tavsiyeleri hakkında bilgi almak için bana doğrudan ulaşabilirsiniz.</p>
         <a href="tel:+905452200653" class="phone-link">
@@ -1583,7 +1791,10 @@ button { cursor: pointer; border: none; background: none; }
       <a href="#anasayfa" class="brand">
         <div class="brand-logo">YEK</div>
         <div class="brand-text">
-          <span class="brand-title">YEK WELLNESS</span>
+          <span class="brand-title">
+            YEK WELLNESS
+            <svg class="hl-logo-svg" width="14" height="14" style="color: var(--gold-primary);"><use href="#hl-logo"/></svg>
+          </span>
           <span class="brand-subtitle">Yusuf Emre Karabörk</span>
         </div>
       </a>
@@ -1688,7 +1899,7 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
-// Generate SVG Product Vector
+// Generate SVG Product Vector with Herbalife Botanical Motif
 const imageForProduct = p => {
   const cat = p[0], name = p[1];
   const safe = escapeHtml(name);
@@ -1722,7 +1933,9 @@ const imageForProduct = p => {
   const brandY = shape === 'bottle' ? 102 : shape === 'can' ? 97 : shape === 'bundle' ? 124 : shape === 'bar' ? 110 : 126;
   const nameY = brandY + 15;
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 250"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${bg}"/><stop offset="1" stop-color="#ffffff"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0b221b" flood-opacity=".12"/></filter></defs><rect width="240" height="250" rx="18" fill="url(#bg)"/><ellipse cx="120" cy="222" rx="65" ry="8" fill="#0b221b" opacity=".08"/><g filter="url(#shadow)">${pack}</g><text x="120" y="${brandY}" text-anchor="middle" font-family="sans-serif" font-size="8.5" font-weight="800" letter-spacing=".2" fill="${shape === 'can' || shape === 'bundle' || shape === 'bar' ? '#ffffff' : accent}">HERBALIFE</text><text x="120" y="${nameY}" text-anchor="middle" font-family="sans-serif" font-size="6" font-weight="600" fill="#2d3b33">${safe.length > 22 ? safe.slice(0, 21) + '…' : safe}</text><text x="120" y="238" text-anchor="middle" font-family="sans-serif" font-size="7.5" font-weight="700" letter-spacing="1.2" fill="#75857a">YEK WELLNESS</text></svg>`;
+  const hlWatermark = `<path d="M120 18 C114 26, 109 35, 119 52 C122 40, 124 28, 120 18 Z M116 34 C106 31, 98 34, 101 50 C111 46, 116 40, 116 34 Z M124 34 C134 31, 142 34, 139 50 C129 46, 124 40, 124 34 Z" fill="${accent}" opacity="0.12"/>`;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 250"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${bg}"/><stop offset="1" stop-color="#ffffff"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0b221b" flood-opacity=".12"/></filter></defs><rect width="240" height="250" rx="18" fill="url(#bg)"/>${hlWatermark}<ellipse cx="120" cy="222" rx="65" ry="8" fill="#0b221b" opacity=".08"/><g filter="url(#shadow)">${pack}</g><text x="120" y="${brandY}" text-anchor="middle" font-family="sans-serif" font-size="8.5" font-weight="800" letter-spacing=".2" fill="${shape === 'can' || shape === 'bundle' || shape === 'bar' ? '#ffffff' : accent}">HERBALIFE</text><text x="120" y="${nameY}" text-anchor="middle" font-family="sans-serif" font-size="6" font-weight="600" fill="#2d3b33">${safe.length > 22 ? safe.slice(0, 21) + '…' : safe}</text><text x="120" y="238" text-anchor="middle" font-family="sans-serif" font-size="7.5" font-weight="700" letter-spacing="1.2" fill="#75857a">YEK WELLNESS</text></svg>`;
 
   return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
 };
@@ -1760,6 +1973,9 @@ function renderProducts() {
         <div class="product-visual">
           <img src="${imageForProduct(p)}" alt="${escapeHtml(p[1])}" loading="lazy">
           <span class="product-category-badge">${escapeHtml(p[0])}</span>
+          <div class="product-hl-stamp">
+            <svg class="hl-logo-svg" width="16" height="16" style="color: var(--green-mid);"><use href="#hl-logo"/></svg>
+          </div>
         </div>
         <div class="product-body">
           <h3 class="product-title">${escapeHtml(p[1])}</h3>
@@ -1795,7 +2011,10 @@ window.openProductModal = function(productName) {
       <div style="width: 140px; height: 140px; margin: 0 auto 16px;">
         <img src="${imageForProduct(p)}" alt="${escapeHtml(p[1])}" style="max-width: 100%; max-height: 100%;">
       </div>
-      <span class="product-category-badge" style="position: relative; top: 0; left: 0; inline-block; margin-bottom: 8px;">${escapeHtml(p[0])}</span>
+      <div style="display: flex; justify-content: center; align-items: center; gap: 6px; margin-bottom: 8px;">
+        <svg class="hl-logo-svg" width="14" height="14" style="color: var(--green-mid);"><use href="#hl-logo"/></svg>
+        <span class="product-category-badge" style="position: relative; top: 0; left: 0;">${escapeHtml(p[0])}</span>
+      </div>
       <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--green-deep); margin: 8px 0;">${escapeHtml(p[1])}</h3>
       <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">${escapeHtml(p[2])}</p>
       
