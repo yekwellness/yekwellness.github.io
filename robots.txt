@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yekwellness.com.tr/sitemap.xml
