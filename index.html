@@ -67,14 +67,29 @@
     .catalog { background: #edf1e8; }
     .catalog-intro { padding: 27px 30px; margin-bottom: 26px; border: 1px solid rgba(32,112,74,.13); border-radius: 18px; background: rgba(255,254,250,.72); color: #53635a; font-size: .91rem; line-height: 1.75; }
     .catalog-intro strong { color: var(--forest); }
+    .catalog-tools { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; margin: 28px 0 22px; }
+    .filter-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter-button { padding: 9px 14px; border: 1px solid #d8e1d4; border-radius: 999px; color: #506157; background: rgba(255,254,250,.68); font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
+    .filter-button:hover, .filter-button.is-active { border-color: var(--green); color: white; background: var(--green); }
+    .search-box { display: flex; align-items: center; gap: 8px; min-width: 240px; padding: 10px 14px; border: 1px solid #d8e1d4; border-radius: 999px; color: #76837a; background: var(--paper); }
+    .search-box svg { flex: none; width: 18px; height: 18px; }
+    .search-box input { width: 100%; min-width: 0; border: 0; outline: 0; color: var(--forest); background: transparent; font: inherit; font-size: .85rem; }
+    .result-count { margin: 0 0 14px; color: #78847c; font-size: .8rem; }
     .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .product { display: flex; flex-direction: column; min-height: 440px; overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--paper); box-shadow: 0 9px 30px rgba(24,58,43,.045); }
     .product-image { display: grid; place-items: center; min-height: 188px; margin: 12px 12px 0; border-radius: 15px; background: linear-gradient(145deg,#edf2e5,#f7f7f0); color: #82917f; }
-    .product-image svg { width: 47px; height: 47px; opacity: .68; }
+    .product-image img { width: 100%; height: 188px; padding: 8px; border-radius: inherit; object-fit: contain; mix-blend-mode: multiply; }
     .product-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
     .product-tag { margin-bottom: 10px; color: var(--green); font-size: .68rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
     .product h3 { margin-bottom: 10px; font-family: Georgia, "Times New Roman", serif; font-size: 1.55rem; font-weight: 500; letter-spacing: -.025em; }
     .product p { margin-bottom: 20px; color: var(--muted); font-size: .91rem; line-height: 1.65; }
+    .product-details { margin: 0 0 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .product-details summary { padding: 13px 0; color: var(--green); font-size: .84rem; font-weight: 750; cursor: pointer; }
+    .product-details dl { margin: 0; padding: 0 0 12px; }
+    .product-details dl div { padding: 9px 0; }
+    .product-details dt { margin-bottom: 4px; color: var(--forest); font-size: .8rem; font-weight: 800; }
+    .product-details dd { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.65; }
+    .empty-state { grid-column: 1/-1; padding: 32px; border-radius: 18px; color: var(--muted); background: var(--paper); text-align: center; }
     .product .button { width: 100%; margin-top: auto; }
     .product .button svg, .nav-cta svg, .button svg { width: 18px; height: 18px; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
@@ -124,6 +139,8 @@
       .section-head { display: block; }
       .section-head p { font-size: .92rem; }
       .catalog-intro { padding: 20px; }
+      .catalog-tools { grid-template-columns: 1fr; }
+      .search-box { min-width: 0; }
       .products, .info-grid { grid-template-columns: 1fr; }
       .product { min-height: 410px; }
       .product-image { min-height: 175px; }
@@ -171,7 +188,19 @@
           <div><p class="kicker">Ürün kataloğu</p><h2>Size uygun olanı bulun.</h2></div>
           <p>Ürün adları, açıklamaları, görselleri ve kullanım detayları ürün bilgi PDF’iniz geldiğinde bu alana eklenecek.</p>
         </div>
-        <div class="catalog-intro"><strong>Şeffaf ve doğru ürün bilgisi:</strong> İçerik, kullanım önerisi ve ürünün kimler için uygun olduğu bilgileri, üretici etiketleri ve paylaşacağınız resmi ürün dokümanlarına göre hazırlanacaktır. Bu sayfadaki kartlar şimdilik içerik ekleme alanlarıdır.</div>
+        <div class="catalog-intro"><strong>PDF’teki bilgilere göre hazırlanmış ürün rehberi:</strong> Ürün açıklamaları, kullanım bilgileri ve dikkat notları paylaştığınız sunumdan derlenmiştir. Her ürün kartını açarak ayrıntıları okuyun. Formül veya etiket güncellenebileceğinden satın almadan/kullanmadan önce ürün ambalajındaki güncel bilgiyi esas alın.</div>
+        <div class="catalog-tools" aria-label="Ürün arama ve filtreleme">
+          <div class="filter-list" role="group" aria-label="Kategori filtresi">
+            <button class="filter-button is-active" type="button" data-filter="Tümü" aria-pressed="true">Tümü</button>
+            <button class="filter-button" type="button" data-filter="İç beslenme" aria-pressed="false">İç beslenme</button>
+            <button class="filter-button" type="button" data-filter="Takviyeler" aria-pressed="false">Takviyeler</button>
+            <button class="filter-button" type="button" data-filter="Aktif yaşam" aria-pressed="false">Aktif yaşam</button>
+            <button class="filter-button" type="button" data-filter="Cilt bakımı" aria-pressed="false">Cilt bakımı</button>
+            <button class="filter-button" type="button" data-filter="Saç ve vücut" aria-pressed="false">Saç ve vücut</button>
+          </div>
+          <label class="search-box"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="product-search" type="search" placeholder="Ürün ara..." aria-label="Ürün ara"></label>
+        </div>
+        <p class="result-count" id="product-count" aria-live="polite"></p>
         <div class="products" id="product-list" aria-live="polite"></div>
         <div class="info-grid">
           <article class="info-card"><span class="number">01</span><h3>Ne amaçla kullanılır?</h3><p>Her ürün için kullanım amacı ve ürünün etikette belirtilen özellikleri, ürün bilgileri doğrulandıktan sonra açıkça paylaşılacak.</p></article>
@@ -185,7 +214,7 @@
       <div class="wrap">
         <div class="about">
           <div class="about-mark"><img src="assets/yek-wellness-logo.png" alt="YEK Wellness"></div>
-          <div><p class="kicker">YEK Wellness</p><h2>Ürünleri tanıyın, sorularınızı sorun.</h2><p>Herbalife bağımsız distribütörü olarak ürünler hakkında bilgilendirme ve ürün seçimi sürecinde destek sunuyorum. İhtiyacınızı ve merak ettiklerinizi paylaşın; ürün detaylarını birlikte inceleyelim.</p><div class="disclaimer">Bu site genel bilgilendirme ve ürün tanıtımı amacı taşır; tıbbi tavsiye, teşhis veya tedavinin yerine geçmez. Ürünler hastalıkları önlemek ya da tedavi etmek amacıyla sunulmaz. Ürünleri etiket talimatlarına göre kullanın. Hamilelik, emzirme, düzenli ilaç kullanımı veya mevcut bir sağlık durumunda sağlık uzmanınıza danışın. Ürünlerin doğal olduğu veya belirli sağlık sonuçları sağladığı yönündeki ifadeler, ürün bazında resmi içerik bilgileri doğrulanmadan kullanılmayacaktır.</div></div>
+          <div><p class="kicker">YEK Wellness</p><h2>Ürünleri tanıyın, sorularınızı sorun.</h2><p>Herbalife bağımsız distribütörü olarak ürünler hakkında bilgilendirme ve ürün seçimi sürecinde destek sunuyorum. İhtiyacınızı ve merak ettiklerinizi paylaşın; ürün detaylarını birlikte inceleyelim.</p><div class="disclaimer">Bu site genel bilgilendirme ve ürün tanıtımı amacı taşır; tıbbi tavsiye, teşhis veya tedavinin yerine geçmez. Takviye edici gıdalar normal beslenmenin yerine geçmez, ilaç değildir ve hastalıkların önlenmesi veya tedavisi amacıyla kullanılmaz. Hamilelik, emzirme, düzenli ilaç kullanımı veya mevcut bir sağlık durumunda sağlık uzmanınıza danışın. Paylaşılan PDF’de yalnızca bazı ürünler için doğal aroma, doğal kaynak veya belirli bitkisel içerik ifadeleri vardır; PDF tüm ürünlerin tamamen doğal olduğu iddiasını desteklemiyor. Her ürünün güncel içeriği için ambalaj etiketini esas alın.</div></div>
         </div>
       </div>
     </section>
@@ -204,34 +233,6 @@
 
   <footer><div class="wrap footer-row"><p>YEK Wellness · Bağımsız Herbalife distribütörü<br>Ürün bilgileri için her zaman ürün ambalajındaki güncel etiketi esas alın.</p><a href="https://wa.me/905452200653" target="_blank" rel="noopener noreferrer">WhatsApp: 0545 220 06 53</a></div></footer>
 
-  <script>
-    // PDF'deki resmi ürün bilgileri geldikten sonra bu liste ürün bazında doldurulacak.
-    // Her ürünün WhatsApp mesajı ürün adına göre ayrı oluşturulur.
-    const products = [];
-    const phone = "905452200653";
-    const list = document.querySelector("#product-list");
-    const placeholderIcon = `<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 40V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M24 27C13 27 9 19 10 9c10 0 17 4 17 14M24 33c1-10 8-16 17-16 1 10-5 17-17 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    if (products.length === 0) {
-      list.innerHTML = Array.from({ length: 3 }, (_, index) => `
-        <article class="product">
-          <div class="product-image">${placeholderIcon}</div>
-          <div class="product-body">
-            <span class="product-tag">${String(index + 1).padStart(2, "0")} · Ürün bilgisi eklenecek</span>
-            <h3>Yeni ürün yakında</h3>
-            <p>Ürün görseli, amacı, kimler için olduğu ve etiket bilgileri PDF’iniz geldikten sonra burada yer alacak.</p>
-            <a class="button" href="https://wa.me/${phone}?text=${encodeURIComponent("Merhaba, YEK Wellness ürün kataloğu hazırlanırken ürünler hakkında bilgi almak istiyorum.")}" target="_blank" rel="noopener noreferrer">Ürünler hakkında sor <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>`).join("");
-    } else {
-      list.innerHTML = products.map((product) => {
-        const message = `Merhaba, ${product.name} ürünü hakkında bilgi almak istiyorum.`;
-        return `<article class="product">
-          <img class="product-image" src="${product.image}" alt="${product.name}" loading="lazy">
-          <div class="product-body"><span class="product-tag">${product.category}</span><h3>${product.name}</h3>
-          <p>${product.description}</p><a class="button" href="https://wa.me/${phone}?text=${encodeURIComponent(message)}" target="_blank" rel="noopener noreferrer">Bu ürünü WhatsApp’tan sor <span aria-hidden="true">↗</span></a></div>
-        </article>`;
-      }).join("");
-    }
-  </script>
+  <script src="products.js"></script>
 </body>
 </html>
