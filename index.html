@@ -43,8 +43,12 @@
     .wrap { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
     .topbar { position: sticky; top: 0; z-index: 10; padding: 12px 0; border-bottom: 1px solid rgba(18,59,45,.07); background: rgba(250,251,248,.76); backdrop-filter: saturate(160%) blur(18px); -webkit-backdrop-filter: saturate(160%) blur(18px); }
     .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; text-decoration: none; }
-    .brand img { display: block; width: 142px; height: 62px; object-fit: contain; mix-blend-mode: multiply; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
+    .brand-seal { position: relative; display: grid; place-items: center; width: 54px; height: 54px; overflow: hidden; border: 1px solid rgba(32,112,74,.14); border-radius: 50%; background: linear-gradient(145deg,rgba(255,255,255,.94),rgba(228,238,218,.8)); box-shadow: 0 5px 16px rgba(18,59,45,.1), inset 0 0 0 4px rgba(255,255,255,.72); }
+    .brand-seal img { display: block; width: 51px; height: 51px; border-radius: 50%; object-fit: cover; mix-blend-mode: multiply; transition: transform .7s var(--ease-out); }
+    .brand:hover .brand-seal img { transform: rotate(-5deg) scale(1.07); }
+    .brand-name { display: flex; flex-direction: column; gap: 1px; color: var(--forest); font-size: .94rem; font-weight: 850; letter-spacing: .04em; line-height: 1; }
+    .brand-name small { color: var(--muted); font-size: .58rem; font-weight: 750; letter-spacing: .2em; }
     .navlinks { display: flex; align-items: center; gap: 30px; font-size: .9rem; font-weight: 600; }
     .navlinks a { text-decoration: none; }
     .navlinks a:hover { color: var(--green); }
@@ -56,11 +60,11 @@
     }
     .nav-cta:hover, .button:hover { transform: translateY(-2px); background: var(--forest); box-shadow: 0 8px 22px rgba(18,59,45,.18); }
     :where(a,button,input,summary):focus-visible { outline: 3px solid rgba(92,141,91,.48); outline-offset: 4px; }
-    .hero { position: relative; overflow: hidden; padding: clamp(70px, 10vw, 126px) 0 86px; }
+    .hero { position: relative; overflow: hidden; padding: clamp(48px, 7vw, 88px) 0 58px; }
     .hero::before, .hero::after { position: absolute; z-index: -1; border-radius: 50%; content: ""; }
     .hero::before { width: 480px; height: 480px; right: -130px; top: -190px; background: radial-gradient(circle, #dce9c9 0, rgba(220,233,201,0) 70%); }
     .hero::after { width: 420px; height: 420px; left: -180px; bottom: -280px; background: radial-gradient(circle, #e6edda 0, rgba(230,237,218,0) 70%); }
-    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 55px; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 40px; }
     .kicker { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 20px; color: var(--green); font-size: .75rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
     .kicker::before { width: 26px; height: 1px; background: var(--leaf); content: ""; }
     h1, h2, h3, p { margin-top: 0; }
@@ -69,17 +73,20 @@
     .hero-copy { max-width: 590px; margin-bottom: 29px; color: var(--muted); font-size: 1.08rem; line-height: 1.8; }
     .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 18px; color: #78847c; font-size: .82rem; }
     .hero-note svg { flex: none; color: var(--green); }
-    .hero-card { position: relative; display: grid; place-items: center; min-height: 340px; padding: 28px; border: 1px solid rgba(255,255,255,.78); border-radius: 34px; background: rgba(255,255,255,.48); box-shadow: var(--shadow); backdrop-filter: blur(12px); animation: card-arrive .9s .12s var(--ease-out) both; }
+    .hero-card { position: relative; display: grid; place-items: center; width: min(100%, 340px); aspect-ratio: 1; min-height: 0; justify-self: center; padding: 38px; border: 1px solid rgba(255,255,255,.92); border-radius: 50%; background: radial-gradient(circle at 35% 25%,rgba(255,255,255,.9),rgba(248,251,245,.62) 55%,rgba(220,235,211,.38)); box-shadow: 0 24px 64px rgba(28,48,37,.1), inset 0 0 0 10px rgba(255,255,255,.24); backdrop-filter: blur(12px); animation: card-arrive .9s .12s var(--ease-out) both; }
+    .hero-card::before { position: absolute; inset: 11px; border: 1px solid rgba(32,112,74,.12); border-radius: 50%; content: ""; animation: orbit-turn 30s linear infinite; }
+    .hero-card::after { position: absolute; inset: 23px; border: 1px dashed rgba(32,112,74,.1); border-radius: 50%; content: ""; animation: orbit-turn 48s linear infinite reverse; }
+    @keyframes orbit-turn { to { transform: rotate(360deg); } }
     @keyframes card-arrive { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    .hero-card img { width: min(100%, 300px); height: 270px; object-fit: contain; mix-blend-mode: multiply; animation: logo-breathe 8s ease-in-out 1s infinite; }
-    @keyframes logo-breathe { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-    .hero-card-label { position: absolute; right: 22px; bottom: 19px; color: #7b887e; font-size: .72rem; letter-spacing: .11em; text-transform: uppercase; }
-    .section { padding: 76px 0; }
+    .hero-card img { position: relative; z-index: 1; width: 100%; height: 100%; border-radius: 50%; object-fit: contain; mix-blend-mode: multiply; animation: logo-breathe 7s ease-in-out 1s infinite; }
+    @keyframes logo-breathe { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.015); } }
+    .hero-card-label { position: absolute; z-index: 2; right: 50%; bottom: 14px; padding: 7px 13px; border: 1px solid rgba(255,255,255,.8); border-radius: 999px; color: #66766b; background: rgba(255,255,255,.78); font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; transform: translateX(50%); white-space: nowrap; }
+    .section { padding: 56px 0; }
     .section-head { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 28px; }
     .section-head h2 { margin-bottom: 9px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(2.35rem, 5vw, 3.8rem); font-weight: 650; letter-spacing: -.06em; line-height: 1.03; }
     .section-head p { max-width: 580px; margin-bottom: 0; color: var(--muted); line-height: 1.7; }
     .catalog { background: rgba(237,242,235,.58); backdrop-filter: blur(2px); }
-    .catalog-intro { padding: 27px 30px; margin-bottom: 26px; border: 1px solid rgba(255,255,255,.85); border-radius: 22px; background: rgba(255,255,255,.58); color: #53635a; font-size: .91rem; line-height: 1.75; box-shadow: 0 8px 30px rgba(28,48,37,.035); }
+    .catalog-intro { padding: 20px 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.85); border-radius: 22px; background: rgba(255,255,255,.58); color: #53635a; font-size: .91rem; line-height: 1.65; box-shadow: 0 8px 30px rgba(28,48,37,.035); }
     .catalog-intro strong { color: var(--forest); }
     .catalog-tools { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; margin: 28px 0 22px; }
     .filter-list { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -91,8 +98,8 @@
     .search-box svg { flex: none; width: 18px; height: 18px; }
     .search-box input { width: 100%; min-width: 0; border: 0; outline: 0; color: var(--forest); background: transparent; font: inherit; font-size: .85rem; }
     .result-count { margin: 0 0 14px; color: #78847c; font-size: .8rem; }
-    .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .product { display: flex; flex-direction: column; min-height: 440px; overflow: hidden; border: 1px solid rgba(255,255,255,.92); border-radius: 24px; background: rgba(255,255,255,.82); box-shadow: 0 8px 28px rgba(28,48,37,.045); transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out), border-color .45s var(--ease-out); }
+    .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .product { display: flex; flex-direction: column; min-height: 400px; overflow: hidden; border: 1px solid rgba(255,255,255,.92); border-radius: 24px; background: rgba(255,255,255,.82); box-shadow: 0 8px 28px rgba(28,48,37,.045); transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out), border-color .45s var(--ease-out); }
     .product:hover { transform: translateY(-5px); border-color: rgba(32,112,74,.13); box-shadow: 0 18px 45px rgba(28,48,37,.10); }
     .product-image { display: grid; place-items: center; min-height: 188px; margin: 12px 12px 0; border-radius: 15px; background: linear-gradient(145deg,#edf2e5,#f7f7f0); color: #82917f; }
     .product-image img { width: 100%; height: 188px; padding: 8px; border-radius: inherit; object-fit: contain; mix-blend-mode: multiply; }
@@ -114,13 +121,14 @@
     .info-card .number { display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 17px; border-radius: 50%; color: var(--green); background: var(--pale); font-size: .82rem; font-weight: 800; }
     .info-card h3 { margin-bottom: 9px; font-size: 1rem; }
     .info-card p { margin-bottom: 0; color: var(--muted); font-size: .87rem; line-height: 1.7; }
-    .about { display: grid; grid-template-columns: .7fr 1.3fr; gap: 50px; align-items: center; padding: 42px; border: 1px solid rgba(255,255,255,.88); border-radius: 28px; background: rgba(255,255,255,.68); box-shadow: 0 15px 45px rgba(28,48,37,.055); backdrop-filter: blur(8px); }
-    .about-mark { display: grid; place-items: center; min-height: 225px; border-radius: 20px; background: var(--cream); }
-    .about-mark img { width: min(78%, 220px); height: 190px; object-fit: contain; mix-blend-mode: multiply; }
+    .about { display: grid; grid-template-columns: .55fr 1.45fr; gap: 34px; align-items: center; padding: 32px; border: 1px solid rgba(255,255,255,.88); border-radius: 28px; background: rgba(255,255,255,.68); box-shadow: 0 15px 45px rgba(28,48,37,.055); backdrop-filter: blur(8px); }
+    .about-mark { position: relative; display: grid; place-items: center; width: min(100%, 230px); aspect-ratio: 1; justify-self: center; overflow: hidden; border: 1px solid rgba(255,255,255,.92); border-radius: 50%; background: radial-gradient(circle at 35% 28%,#fff,#edf3e8 76%); box-shadow: 0 14px 36px rgba(28,48,37,.08), inset 0 0 0 8px rgba(255,255,255,.52); }
+    .about-mark::before { position: absolute; inset: 9px; border: 1px solid rgba(32,112,74,.13); border-radius: 50%; content: ""; }
+    .about-mark img { position: relative; z-index: 1; width: 88%; height: 88%; border-radius: 50%; object-fit: contain; mix-blend-mode: multiply; animation: logo-breathe 7s ease-in-out infinite; }
     .about h2 { margin-bottom: 14px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 650; letter-spacing: -.06em; line-height: 1.06; }
     .about p { margin-bottom: 0; color: var(--muted); line-height: 1.8; }
     .disclaimer { margin-top: 25px; padding: 19px 21px; border-left: 3px solid #a7bd83; border-radius: 0 12px 12px 0; color: #66736a; background: #eef2e8; font-size: .82rem; line-height: 1.7; }
-    .contact { padding: 67px 24px; border: 1px solid rgba(255,255,255,.12); border-radius: 30px; color: white; background: linear-gradient(145deg,#173f31,#102f26); box-shadow: 0 22px 58px rgba(18,59,45,.15); text-align: center; }
+    .contact { padding: 50px 24px; border: 1px solid rgba(255,255,255,.12); border-radius: 30px; color: white; background: linear-gradient(145deg,#173f31,#102f26); box-shadow: 0 22px 58px rgba(18,59,45,.15); text-align: center; }
     .contact .kicker { color: #cfdfa8; }
     .contact .kicker::before { background: #cfdfa8; }
     .contact h2 { margin-bottom: 12px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 650; letter-spacing: -.06em; line-height: 1.04; }
@@ -131,45 +139,65 @@
     .footer-row { display: flex; align-items: start; justify-content: space-between; gap: 25px; }
     footer p { max-width: 690px; margin-bottom: 0; }
     footer a { color: var(--green); font-weight: 700; text-decoration: none; }
+    .theme-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid rgba(29,57,43,.12); border-radius: 999px; color: var(--forest); background: rgba(255,255,255,.72); font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; transition: color .28s var(--ease-out), background .28s var(--ease-out), transform .28s var(--ease-out); }
+    .theme-toggle:hover { transform: translateY(-1px); }
+    .theme-toggle svg { width: 17px; height: 17px; }
+    .theme-toggle .sun-icon { display: none; }
+    body.monochrome { --forest:#111; --green:#171717; --leaf:#777; --pale:#e8e8e8; --cream:#f4f4f4; --muted:#626262; --line:rgba(0,0,0,.1); --paper:rgba(255,255,255,.9); background:#f1f1f1; filter:grayscale(1); }
+    body.monochrome .ambient::before { background:radial-gradient(circle,rgba(180,180,180,.42),rgba(180,180,180,0) 68%); }
+    body.monochrome .ambient::after { background:radial-gradient(circle,rgba(210,210,210,.52),rgba(210,210,210,0) 70%); }
+    body.monochrome .ambient-orb { background:radial-gradient(circle,rgba(160,160,160,.25),rgba(160,160,160,0) 68%); }
+    body.monochrome .hero-card, body.monochrome .about-mark { background:radial-gradient(circle at 35% 25%,#fff,#e8e8e8 76%); }
+    body.monochrome .contact { background:linear-gradient(145deg,#202020,#050505); }
+    body.monochrome .contact .button { color:#111; background:#fff; }
+    body.monochrome .contact .button:hover { color:#fff; background:#444; }
+    body.monochrome .theme-toggle { color:#fff; background:#111; }
+    body.monochrome .theme-toggle .sun-icon { display:block; }
+    body.monochrome .theme-toggle .contrast-icon { display:none; }
+    body.monochrome .brand-seal { background:linear-gradient(145deg,#fff,#e4e4e4); }
     @media (max-width: 820px) {
       .hero-grid { grid-template-columns: 1fr .72fr; gap: 25px; }
-      .hero-card { min-height: 280px; }
-      .hero-card img { height: 220px; }
+      .hero-card { width: min(100%, 300px); min-height: 0; padding: 32px; }
       .products { grid-template-columns: repeat(2, 1fr); }
       .about { grid-template-columns: .65fr 1.35fr; gap: 28px; padding: 28px; }
     }
     @media (max-width: 620px) {
       .wrap { width: min(100% - 32px, 520px); }
       .topbar { padding: 11px 0; }
-      .brand img { width: 112px; height: 52px; }
-      .navlinks { gap: 14px; font-size: .8rem; }
+      .brand-seal { width: 42px; height: 42px; }
+      .brand-seal img { width: 40px; height: 40px; }
+      .brand-name { font-size: .82rem; }
+      .navlinks { gap: 9px; font-size: .8rem; }
       .navlinks a:first-child { display: none; }
       .nav-cta { padding: 10px 13px; font-size: .78rem; }
-      .hero { padding: 70px 0 60px; }
+      .theme-toggle { gap: 0; width: 38px; height: 38px; justify-content: center; padding: 0; }
+      .theme-label { display: none; }
+      .hero { padding: 48px 0 40px; }
       .hero-grid { grid-template-columns: 1fr; }
       h1 { font-size: clamp(3.25rem, 15vw, 5rem); }
       .hero-copy { font-size: 1rem; }
-      .hero-card { min-height: 210px; padding: 15px; }
-      .hero-card img { height: 175px; }
-      .hero-card-label { right: 13px; bottom: 10px; font-size: .62rem; }
-      .section { padding: 57px 0; }
+      .hero-card { width: min(83vw, 290px); min-height: 0; padding: 30px; }
+      .hero-card img { width: 100%; height: 100%; }
+      .hero-card-label { right: 50%; bottom: 10px; font-size: .55rem; }
+      .section { padding: 45px 0; }
       .section-head { display: block; }
       .section-head p { font-size: .92rem; }
       .catalog-intro { padding: 20px; }
       .catalog-tools { grid-template-columns: 1fr; }
       .search-box { min-width: 0; }
       .products, .info-grid { grid-template-columns: 1fr; }
-      .product { min-height: 410px; }
+      .product { min-height: 0; }
       .product-image { min-height: 175px; }
       .about { grid-template-columns: 1fr; padding: 20px; }
-      .about-mark { min-height: 170px; }
-      .about-mark img { height: 150px; }
-      .contact { padding: 49px 20px; }
+      .about-mark { width: min(100%, 190px); min-height: 0; }
+      .about-mark img { width: 88%; height: 88%; }
+      .contact { padding: 40px 20px; }
       .footer-row { flex-direction: column; }
     }
     .motion-ready [data-reveal] { opacity: 0; transform: translateY(20px) scale(.99); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
     .motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0) scale(1); }
     .motion-ready .product[data-reveal] { transition-delay: var(--reveal-delay, 0ms); }
+    .motion-ready .product[data-reveal].is-visible:hover { transform: translateY(-5px); }
     @media (max-width: 620px) {
       .ambient::before { width: 90vw; height: 90vw; filter: blur(55px); }
       .ambient::after { width: 78vw; height: 78vw; filter: blur(52px); }
@@ -180,16 +208,26 @@
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       .motion-ready [data-reveal] { opacity: 1; transform: none; }
     }
+    @media (max-width: 380px) {
+      .nav { gap: 7px; }
+      .brand { gap: 7px; }
+      .navlinks a[href="#hakkimda"] { display: none; }
+    }
   </style>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"><span class="ambient-orb"></span></div>
   <header class="topbar">
     <div class="wrap nav">
-      <a class="brand" href="#anasayfa" aria-label="YEK Wellness ana sayfa"><img src="assets/yek-wellness-logo.png" alt="YEK Wellness yaprak logosu"></a>
+      <a class="brand" href="#anasayfa" aria-label="YEK Wellness ana sayfa"><span class="brand-seal"><img src="assets/yek-wellness-logo.png" alt=""></span><span class="brand-name">YEK<small>WELLNESS</small></span></a>
       <nav class="navlinks" aria-label="Ana menü">
         <a href="#urunler">Ürünler</a>
         <a href="#hakkimda">Hakkımda</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Siyah beyaz temayı aç" aria-pressed="false" title="Siyah beyaz tema">
+          <svg class="contrast-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 3a9 9 0 0 0 0 18V3Z" fill="currentColor"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <span class="theme-label">Siyah-beyaz</span>
+        </button>
         <a class="nav-cta" href="https://wa.me/905452200653?text=Merhaba%2C%20YEK%20Wellness%20%C3%BCr%C3%BCnleri%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 9.2c.4 1.7 1.8 3.1 3.5 3.8l1.2-.9 1.8 1c-.2 1-1 1.6-2 1.6-3.3-.2-6.1-3-6.3-6.3 0-1 .6-1.8 1.6-2l1 1.8-.8 1Z" fill="currentColor"/></svg>
           WhatsApp
@@ -218,7 +256,7 @@
           <div><p class="kicker">Ürün kataloğu</p><h2>Size uygun olanı bulun.</h2></div>
           <p>İçerik, kullanım şekli ve dikkat notlarıyla 40 ürün seçeneğini keşfedin. Arama ve kategori filtreleriyle size gereken bilgiye kolayca ulaşın.</p>
         </div>
-        <div class="catalog-intro"><strong>PDF’teki bilgilere göre hazırlanmış ürün rehberi:</strong> Ürün açıklamaları, kullanım bilgileri ve dikkat notları paylaştığınız sunumdan derlenmiştir. Her ürün kartını açarak ayrıntıları okuyun. Formül veya etiket güncellenebileceğinden satın almadan/kullanmadan önce ürün ambalajındaki güncel bilgiyi esas alın.</div>
+        <div class="catalog-intro"><strong>Ürünleri ve kullanım bilgilerini keşfedin.</strong> İçerik, hazırlama şekli ve dikkat notlarını görmek için ürün kartlarını açın. Formüller güncellenebileceğinden, ürünü kullanmadan önce ambalaj üzerindeki güncel bilgileri kontrol edin.</div>
         <div class="catalog-tools" aria-label="Ürün arama ve filtreleme">
           <div class="filter-list" role="group" aria-label="Kategori filtresi">
             <button class="filter-button is-active" type="button" data-filter="Tümü" aria-pressed="true">Tümü</button>
@@ -233,8 +271,8 @@
         <p class="result-count" id="product-count" aria-live="polite"></p>
         <div class="products" id="product-list" aria-live="polite"></div>
         <div class="info-grid">
-          <article class="info-card"><span class="number">01</span><h3>Kullanım amacını inceleyin</h3><p>Ürün kartlarında PDF’te belirtilen amaç ve öne çıkan özellikler sade bir dille özetlenir.</p></article>
-          <article class="info-card"><span class="number">02</span><h3>Kişisel uygunluğu değerlendirin</h3><p>Ürün dokümanındaki hedef kullanıcı ve dikkat notlarını okuyun; sağlık durumunuz için uzman görüşü alın.</p></article>
+          <article class="info-card"><span class="number">01</span><h3>Kullanım amacını inceleyin</h3><p>Ürün kartlarında kullanım amacı ve öne çıkan özellikler sade bir dille özetlenir.</p></article>
+          <article class="info-card"><span class="number">02</span><h3>Kişisel uygunluğu değerlendirin</h3><p>Ürünlerin kullanım ve dikkat notlarını okuyun; sağlık durumunuz için uzman görüşü alın.</p></article>
           <article class="info-card"><span class="number">03</span><h3>Etiketi esas alın</h3><p>Formüller ve kullanım talimatları değişebilir. Güncel içerik, porsiyon ve uyarılar için ürün ambalajını kontrol edin.</p></article>
         </div>
       </div>
@@ -244,7 +282,7 @@
       <div class="wrap">
         <div class="about">
           <div class="about-mark"><img src="assets/yek-wellness-logo.png" alt="YEK Wellness"></div>
-          <div><p class="kicker">YEK Wellness</p><h2>Ürünleri tanıyın, sorularınızı sorun.</h2><p>Herbalife bağımsız distribütörü olarak ürünler hakkında bilgilendirme ve ürün seçimi sürecinde destek sunuyorum. İhtiyacınızı ve merak ettiklerinizi paylaşın; ürün detaylarını birlikte inceleyelim.</p><div class="disclaimer">Bu site genel bilgilendirme ve ürün tanıtımı amacı taşır; tıbbi tavsiye, teşhis veya tedavinin yerine geçmez. Takviye edici gıdalar normal beslenmenin yerine geçmez, ilaç değildir ve hastalıkların önlenmesi veya tedavisi amacıyla kullanılmaz. Hamilelik, emzirme, düzenli ilaç kullanımı veya mevcut bir sağlık durumunda sağlık uzmanınıza danışın. Paylaşılan PDF’de yalnızca bazı ürünler için doğal aroma, doğal kaynak veya belirli bitkisel içerik ifadeleri vardır; PDF tüm ürünlerin tamamen doğal olduğu iddiasını desteklemiyor. Her ürünün güncel içeriği için ambalaj etiketini esas alın.</div></div>
+          <div><p class="kicker">YEK Wellness</p><h2>Ürünleri tanıyın, sorularınızı sorun.</h2><p>Herbalife bağımsız distribütörü olarak ürünler hakkında bilgilendirme ve ürün seçimi sürecinde destek sunuyorum. İhtiyacınızı ve merak ettiklerinizi paylaşın; ürün detaylarını birlikte inceleyelim.</p><div class="disclaimer">Bu site genel bilgilendirme ve ürün tanıtımı amacı taşır; tıbbi tavsiye, teşhis veya tedavinin yerine geçmez. Takviye edici gıdalar normal beslenmenin yerine geçmez, ilaç değildir ve hastalıkların önlenmesi veya tedavisi amacıyla kullanılmaz. Hamilelik, emzirme, düzenli ilaç kullanımı veya mevcut bir sağlık durumunda sağlık uzmanınıza danışın. Ürün içerikleri ürüne göre farklılık gösterir; tüm ürünler için “tamamen doğal” iddiası kullanılmamaktadır. Güncel içerik için ambalaj etiketini esas alın.</div></div>
         </div>
       </div>
     </section>
@@ -264,6 +302,26 @@
   <footer><div class="wrap footer-row"><p>YEK Wellness · Bağımsız Herbalife distribütörü<br>Ürün bilgileri için her zaman ürün ambalajındaki güncel etiketi esas alın.</p><a href="https://wa.me/905452200653" target="_blank" rel="noopener noreferrer">WhatsApp: 0545 220 06 53</a></div></footer>
 
   <script>
+    (() => {
+      const button = document.querySelector("#theme-toggle");
+      const label = button.querySelector(".theme-label");
+      const storageKey = "yek-wellness-theme";
+      const setTheme = (monochrome) => {
+        document.body.classList.toggle("monochrome", monochrome);
+        button.setAttribute("aria-pressed", String(monochrome));
+        button.setAttribute("aria-label", monochrome ? "Renkli temaya dön" : "Siyah beyaz temayı aç");
+        button.title = monochrome ? "Renkli temaya dön" : "Siyah beyaz tema";
+        label.textContent = monochrome ? "Renkli tema" : "Siyah-beyaz";
+        document.querySelector('meta[name="theme-color"]').content = monochrome ? "#111111" : "#f5f6ef";
+      };
+      try { setTheme(localStorage.getItem(storageKey) === "monochrome"); } catch { setTheme(false); }
+      button.addEventListener("click", () => {
+        const monochrome = !document.body.classList.contains("monochrome");
+        setTheme(monochrome);
+        try { localStorage.setItem(storageKey, monochrome ? "monochrome" : "color"); } catch {}
+      });
+    })();
+
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
       document.documentElement.classList.add("motion-ready");
       const revealObserver = new IntersectionObserver((entries, observer) => {
