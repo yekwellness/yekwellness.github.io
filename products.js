@@ -60,9 +60,9 @@ window.yekProducts = [
       return inGroup && (!query || text.includes(query));
     });
     count.textContent = `${matches.length} ürün gösteriliyor`;
-    list.innerHTML = matches.length ? matches.map((product) => {
+    list.innerHTML = matches.length ? matches.map((product, index) => {
       const message = `Merhaba, ${product.name} ürünü hakkında bilgi almak istiyorum. İçeriğini ve kullanım şeklini paylaşabilir misiniz?`;
-      return `<article class="product">
+      return `<article class="product" data-reveal style="--reveal-delay:${Math.min(index, 5) * 55}ms">
         <div class="product-image"><img src="assets/products/${esc(product.image)}" alt="${esc(product.name)} ürün görseli" loading="lazy"></div>
         <div class="product-body">
           <span class="product-tag">${esc(product.group)} · ${esc(product.category)}</span>
@@ -79,6 +79,7 @@ window.yekProducts = [
         </div>
       </article>`;
     }).join("") : `<div class="empty-state">Aramanızla eşleşen ürün bulunamadı. Ürün adını veya kategoriyi değiştirip tekrar deneyin.</div>`;
+    if (window.yekReveal) window.yekReveal(list);
   }
   search.addEventListener("input", render);
   filters.forEach((button) => button.addEventListener("click", () => {
